@@ -29,21 +29,6 @@ jobs:
         run: |
           unzip -o LuaPad32_Project_with_build.zip -d extracted
 
-      - name: Replace settings.gradle
-        run: |
-          SETTINGS=$(find . -maxdepth 2 -name settings.gradle -type f | head -1)
-          if [ -z "$SETTINGS" ]; then
-            echo "ERROR: settings.gradle not found in repository root"
-            exit 1
-          fi
-          TARGET=$(find extracted -name settings.gradle -type f | head -1)
-          if [ -z "$TARGET" ]; then
-            echo "ERROR: settings.gradle not found in ZIP"
-            exit 1
-          fi
-          cp "$SETTINGS" "$TARGET"
-          echo "Replaced: $TARGET"
-
       - name: Build APK
         run: |
           SETTINGS=$(find extracted -name settings.gradle -type f | head -1)
